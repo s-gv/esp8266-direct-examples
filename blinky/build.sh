@@ -6,7 +6,8 @@ ESP8266_NONOS_SDK_PATH='/home/sagar/ESP8266_NONOS_SDK-3.0'
 # SPI_FLASH_SIZE_MAP=4 is for NodeMCUv3 with 4MiB of flash. Set SPI_FLASH_SIZE_MAP appropriately based on the flash size in your module.
 # See the ESP8266 SDK Getting Started guide. https://www.espressif.com/sites/default/files/documentation/2a-esp8266-sdk_getting_started_guide_en.pdf
 
-CFLAGS="-Os -g -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -ffunction-sections -fdata-sections -fno-builtin-printf -DICACHE_FLASH -DSPI_FLASH_SIZE_MAP=4"
+SPI_FLASH_SIZE_MAP="4"
+CFLAGS="-Os -g -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -ffunction-sections -fdata-sections -fno-builtin-printf -DICACHE_FLASH -DSPI_FLASH_SIZE_MAP=$SPI_FLASH_SIZE_MAP"
 IFLAGS="-I. -I$ESP8266_NONOS_SDK_PATH/include -I$ESP8266_NONOS_SDK_PATH/include/eagle -I$ESP8266_NONOS_SDK_PATH/driver_lib/include"
 LFLAGS="-L$ESP8266_NONOS_SDK_PATH/lib -nostdlib -T$ESP8266_NONOS_SDK_PATH/ld/eagle.app.v6.ld"
 LDFLAGS="-Wl,--no-check-sections -Wl,--gc-sections -u call_user_start -Wl,-static"
@@ -25,7 +26,7 @@ xtensa-lx106-elf-objcopy --only-section .rodata -O binary eagle.app.v6.out eagle
 xtensa-lx106-elf-objcopy --only-section .irom0.text -O binary eagle.app.v6.out eagle.app.v6.irom0text.bin
 
 
-python $ESP8266_NONOS_SDK_PATH/tools/gen_appbin.py eagle.app.v6.out 0 0 0 4 0
+python $ESP8266_NONOS_SDK_PATH/tools/gen_appbin.py eagle.app.v6.out 0 0 0 $SPI_FLASH_SIZE_MAP 0
 mv eagle.app.flash.bin eagle.flash.bin
 mv eagle.app.v6.irom0text.bin eagle.irom0text.bin
 rm eagle.app.v6.*
