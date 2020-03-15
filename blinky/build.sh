@@ -3,7 +3,8 @@ set -e
 
 ESP8266_NONOS_SDK_PATH='/home/sagar/ESP8266_NONOS_SDK-3.0'
 
-# SPI_FLASH_SIZE_MAP=4 is for NodeMCUv3 with 4MiB of flash. Set SPI_FLASH_SIZE_MAP appropriately based on the flash size in your module
+# SPI_FLASH_SIZE_MAP=4 is for NodeMCUv3 with 4MiB of flash. Set SPI_FLASH_SIZE_MAP appropriately based on the flash size in your module.
+# See the ESP8266 SDK Getting Started guide. https://www.espressif.com/sites/default/files/documentation/2a-esp8266-sdk_getting_started_guide_en.pdf
 
 CFLAGS="-Os -g -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals -ffunction-sections -fdata-sections -fno-builtin-printf -DICACHE_FLASH -DSPI_FLASH_SIZE_MAP=4"
 IFLAGS="-I. -I$ESP8266_NONOS_SDK_PATH/include -I$ESP8266_NONOS_SDK_PATH/include/eagle -I$ESP8266_NONOS_SDK_PATH/driver_lib/include"
