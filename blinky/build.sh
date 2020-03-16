@@ -11,10 +11,10 @@ CFLAGS="-Os -g -Wpointer-arith -Wundef -Werror -Wl,-EL -fno-inline-functions -no
 IFLAGS="-I. -I$ESP8266_NONOS_SDK_PATH/include -I$ESP8266_NONOS_SDK_PATH/include/eagle -I$ESP8266_NONOS_SDK_PATH/driver_lib/include"
 LFLAGS="-L$ESP8266_NONOS_SDK_PATH/lib -nostdlib -T$ESP8266_NONOS_SDK_PATH/ld/eagle.app.v6.ld"
 LDFLAGS="-Wl,--no-check-sections -Wl,--gc-sections -u call_user_start -Wl,-static"
-LDLIBS="-Wl,--start-group -lc -lgcc -lhal -lphy -lpp -lnet80211 -llwip -lwpa -lcrypto -lmain -ljson -lupgrade -lssl -lpwm -lsmartconfig -Wl,--end-group"
+LDLIBS="-lc -lgcc -lhal -lphy -lpp -lnet80211 -llwip -lwpa -lcrypto -lmain -ljson -lupgrade -lssl -lpwm -lsmartconfig"
 
 
-xtensa-lx106-elf-gcc $CFLAGS $IFLAGS $LFLAGS $LDFLAGS blinky.c $LDLIBS -o eagle.app.v6.out
+xtensa-lx106-elf-gcc $CFLAGS $IFLAGS $LFLAGS $LDFLAGS -Wl,--start-group preinit.c blinky.c $LDLIBS -Wl,--end-group -o eagle.app.v6.out
 
 #python -m esptool elf2image eagle.app.v6.out
 
