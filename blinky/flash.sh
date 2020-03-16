@@ -1,7 +1,11 @@
 #!/bin/bash
 
 
-# Run this once to load init data! The addresses 0x3fe000 etc. in the command below are for 4MiB flash version of NodeMCUv3. See ESP8266 Getting Started guide for proper addresses if you have a different module. https://www.espressif.com/sites/default/files/documentation/2a-esp8266-sdk_getting_started_guide_en.pdf
+# Run the commented command below once to load init data! At minimum, the ESP8266 SDK expects the 4th sector from the end to have "init data", and the 2nd sector from the end to be blank.
+# The addresses 0x3fe000 etc. in the command below are for 4MiB flash version of NodeMCUv3.
+# See ESP8266 Getting Started guide (section 4 flash maps) or the NodeMCU documentation on SDK init data for proper addresses if you have a different module.
+# https://nodemcu.readthedocs.io/en/master/flash/#sdk-init-data
+# https://www.espressif.com/sites/default/files/documentation/2a-esp8266-sdk_getting_started_guide_en.pdf
 
 ESP8266_NONOS_SDK_PATH='/home/sagar/ESP8266_NONOS_SDK-3.0'
 
